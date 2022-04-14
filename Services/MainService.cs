@@ -8,34 +8,61 @@ namespace ApplicationTemplate.Services;
 /// </summary>
 public class MainService : IMainService
 {
-    private readonly IFileService _fileService;
-    public MainService(IFileService fileService)
+    
+    public MainService()
     {
-        _fileService = fileService;
+        
     }
 
     public void Invoke()
     {
-        string choice;
-        do
-        {
-            Console.WriteLine("1) Add Movie");
-            Console.WriteLine("2) Display All Movies");
-            Console.WriteLine("X) Quit");
-            choice = Console.ReadLine();
+        var weapon = new Weapon();
+        weapon.Name = "Sword";
+        weapon.Damage = 10;
 
-            // Logic would need to exist to validate inputs and data prior to writing to the file
-            // You would need to decide where this logic would reside.
-            // Is it part of the FileService or some other service?
-            if (choice == "1")
-            {
-                _fileService.Write();
-            }
-            else if (choice == "2")
-            {
-                _fileService.Read();
-            }
-        }
-        while (choice != "X");
+        var armor = new Armor();
+        armor.Name = "Shirt";
+        armor.Protection = 5;
+
+        var player = new Player(weapon, armor);
+        player.Name = "Gronk";
+
+        var monster = new Monster(weapon, armor);
+        monster.Name = "Minotaur";
+
+        player.Attack(monster);
+       
     }
+}
+public class Monster
+{
+    public Monster(Weapon weapon, Armor armor)
+    { 
+        throw new NotImplementedException();
+    }
+
+    public string Name { get; set; }
+
+}
+public class Player
+{ 
+    public Player(Weapon weapon, Armor armor)
+    { 
+        throw new NotImplementedException();
+    }
+
+    public string Name { get; set; }
+
+}
+
+public class Armor
+{
+    public string Name { get; set; }
+    public string Protection { get; set; }
+}
+
+public class Weapon
+{
+    public string Name { get; set; }
+    public int Damage { get; set; }
 }
